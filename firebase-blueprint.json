@@ -1,0 +1,35 @@
+{
+  "collections": {
+    "articles": {
+      "rules": "allow read: if true; allow write: if request.auth != null;",
+      "schema": {
+        "title": "string",
+        "content": "string",
+        "authorId": "string",
+        "authorName": "string",
+        "createdAt": "timestamp",
+        "category": "string",
+        "tags": "array",
+        "excerpt": "string",
+        "imageUrl": "string"
+      },
+      "indexes": [
+        { "fields": ["category", "createdAt"] },
+        { "fields": ["createdAt"] }
+      ]
+    },
+    "comments": {
+      "rules": "allow read: if true; allow write: if request.auth != null;",
+      "schema": {
+        "articleId": "string",
+        "userId": "string",
+        "userName": "string",
+        "content": "string",
+        "createdAt": "timestamp"
+      },
+      "indexes": [
+        { "fields": ["articleId", "createdAt"] }
+      ]
+    }
+  }
+}
