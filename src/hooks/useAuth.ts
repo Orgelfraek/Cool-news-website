@@ -14,7 +14,14 @@ export function useAuth() {
     return unsubscribe;
   }, []);
 
-  const login = () => signInWithPopup(auth, googleProvider);
+  const login = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.error("Login failed", error);
+      alert("Login failed: " + (error instanceof Error ? error.message : String(error)));
+    }
+  };
   const logout = () => signOut(auth);
 
   return { user, loading, login, logout };
